@@ -64,9 +64,9 @@ db.students.remove({avgScore: {$lt: 2.5}})
 db.getCollection('students').update({'parents.profession' : "teacher"},{$set:{avgScore:5}},{multi: true})
 
 17) Знайти дітей які вчаться в початковій школі (до 5 класу) і вивчають фізику ( physics )
--
-18) Знайти найуспішніший клас
+db.getCollection('students').find({$and:[{class:{$gte: 1}},{class: {$lte: 5}},{lessons: 'physics'}]})
 
+18) Знайти найуспішніший клас
 db.students.aggregate([{
   $group: {"_id": "$class", "SumBestClass": {"$avg": "$avgScore"}}
 }, {
